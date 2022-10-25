@@ -1,23 +1,28 @@
 #include <stdio.h>
 int tank_kofe = 15000, tank_moloko = 10000, tank_water = 20000,
     tank_kakao = 2000;
+void vstrechayshay();
+void dostavka();
+void proverka_kofe();
+void vibor_oplati(int otvet);
+void resultat(int otvet_klient, int money_klienta);
+void zakaz();
 
-int vibor_oplati(int oplata_klienta);
-int resultat(int otvet_klient, int money_klienta);
+int main() { vstrechayshay(); }
 
-int vstrechayshay()
+void vstrechayshay()
 {
     char vibor;
     printf("Vi za kofe? (y or n)");
     scanf("%c", &vibor);
     if (vibor == 'y') {
-        int proverka_kofe();
+        proverka_kofe();
     } else {
         int servise();
     }
 }
 
-int dostavka()
+void dostavka()
 {
     int tank = 0;
     int skok_dobavit = 0;
@@ -65,7 +70,7 @@ int dostavka()
     }
 }
 
-int proverka_kofe()
+void proverka_kofe()
 {
 
     if (tank_water < 100) {
@@ -77,14 +82,14 @@ int proverka_kofe()
             printf("kofe i kakao net");
             dostavka();
         }
-        int zakaz();
+        zakaz();
     }
-    int zakaz();
+    zakaz();
 }
 
-int zakaz()
+void zakaz()
 {
-    char napitok[7];
+    char napitok[7] = {'e', 'l', 'd', 'a', 'k', 'l', 'k'};
     int otvet_klient;
     int otvet_klienta;
     int i = 0;
@@ -104,27 +109,27 @@ int zakaz()
         }
         printf("Vvidete chislo nujnogo napitka: ");
         scanf("%d", &otvet_klienta);
-        if (otvet_klienta > 6)
-            ;
-        {
+        if (otvet_klienta > 6) {
             printf("Sovsem durak?");
             vstrechayshay();
         }
         vibor_oplati(otvet_klienta);
     }
+    i = 0;
     for (i = 0; i < 6; i++) {
-        printf("napitok pomechen cifroi %d %c \n", i, napitok[i]);
+        printf("%c pomechen cifroi %d \n", i, napitok[i]);
     }
     printf("Vvidete chislo nujnogo napitka: ");
     scanf("%d", &otvet_klienta);
     if (otvet_klienta > 7) {
         printf("Sovsem durak?");
         vstrechayshay();
+    } else {
         vibor_oplati(otvet_klienta);
     }
 }
 
-int vibor_oplati(int otvet_klienta)
+void vibor_oplati(int otvet_klienta)
 {
     int oplata = 0;
     int money_klienta = 0;
@@ -133,9 +138,11 @@ int vibor_oplati(int otvet_klienta)
     if (oplata == 1) {
         printf("Vnesite dengi");
         scanf("%d", &money_klienta);
+        resultat(otvet_klienta, money_klienta);
     }
 }
-int resultat(int otvet_klient, int money_klienta)
+
+void resultat(int otvet_klient, int money_klienta)
 {
     int cena = 0;
     int sdacha = 0;
@@ -153,7 +160,7 @@ int resultat(int otvet_klient, int money_klienta)
             sdacha = money_klienta - cena;
             printf("vasha sdacha %d", sdacha);
         }
-        printf("Spasibo chto polsuetesi nashimi uslugami!");
+        printf("\n Spasibo chto polsuetesi nashimi uslugami!");
         break;
     case 2:
 
