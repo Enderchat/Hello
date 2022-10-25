@@ -92,7 +92,6 @@ void zakaz()
     char napitok[7] = {'e', 'l', 'd', 'a', 'k', 'l', 'k'};
     int otvet_klient;
     int otvet_klienta;
-    int i = 0;
     if (tank_kofe < 25) {
         printf("%c (yes - 1, no - 2)", napitok[6]);
         scanf("%d", &otvet_klient);
@@ -104,7 +103,7 @@ void zakaz()
         }
     }
     if (tank_kakao < 50) {
-        for (i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             printf("napitok pomechen cifroi %d, %c \n", i, napitok[i]);
         }
         printf("Vvidete chislo nujnogo napitka: ");
@@ -115,9 +114,11 @@ void zakaz()
         }
         vibor_oplati(otvet_klienta);
     }
-    i = 0;
-    for (i = 0; i < 6; i++) {
-        printf("%c pomechen cifroi %d \n", i, napitok[i]);
+    
+
+
+    for (int i = 0; i < 7; i++) {
+        printf("%c pomechen - cifroi: %d \n", napitok[i], i);
     }
     printf("Vvidete chislo nujnogo napitka: ");
     scanf("%d", &otvet_klienta);
@@ -136,8 +137,8 @@ void vibor_oplati(int otvet_klienta)
     printf("Oplata nalichkoi ili kartoi? (1 ili 2)");
     scanf("%d", &oplata);
     if (oplata == 1) {
-        printf("Vnesite dengi");
-        scanf("%d", &money_klienta);
+        printf("Vnesite dengi ");
+        scanf("%d \n", &money_klienta);
         resultat(otvet_klienta, money_klienta);
     }
 }
