@@ -1,12 +1,23 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 int tank_kofe = 15000, tank_moloko = 10000, tank_water = 20000,
-    tank_kakao = 2000;
+    tank_kakao = 2000, money = 15000;
 void vstrechayshay();
 void dostavka();
 void proverka_kofe();
-void vibor_oplati(int otvet);
-void resultat(int otvet_klient, int money_klienta);
+void vibor_oplati(int otvet_klienta);
+void resultat(int otvet_klienta, int money_klienta, int oplata);
 void zakaz();
+void OKONCHANIE();
+void espresso(int oplata,int otvet_klienta,int money_klienta);
+void lungo(int oplata,int otvet_klienta,int money_klienta);
+void doppio(int oplata,int otvet_klienta,int money_klienta);
+void amerikano(int oplata,int otvet_klienta,int money_klienta);
+void kapuchino(int oplata,int otvet_klienta,int money_klienta);
+void latte(int oplata,int otvet_klienta,int money_klienta);
+void kakao(int oplata,int otvet_klienta,int money_klienta);
+void tankeri(int otvet_klienta);
 
 int main() { vstrechayshay(); }
 
@@ -15,8 +26,9 @@ void vstrechayshay()
     char vibor;
     printf("Vi za kofe? (y or n)");
     scanf("%c", &vibor);
+    setbuf(stdin, NULL);
     if (vibor == 'y') {
-        proverka_kofe();
+        zakaz();
     } else {
         int servise();
     }
@@ -25,66 +37,38 @@ void vstrechayshay()
 void dostavka()
 {
     int tank = 0;
-    int skok_dobavit = 0;
-    printf("chego nexvataet? (vsego 4)");
+    printf("chego nexvataet? (vsego 5)");
     printf("%d \n,%d \n,%d \n,%d \n", tank_kofe, tank_water, tank_moloko,
            tank_kakao);
     scanf("%d", &tank);
+    setbuf(stdin, NULL);
     switch (tank) {
     case 1:
-        scanf("%d", &skok_dobavit);
-        tank_kofe += skok_dobavit;
+        tank_kofe += 10000;
         vstrechayshay();
         break;
 
     case 2:
-        scanf("%d", &skok_dobavit);
-        tank_water += skok_dobavit;
+        tank_water += 10000;
         vstrechayshay();
         break;
     case 3:
-        scanf("%d", &skok_dobavit);
-        tank_moloko += skok_dobavit;
+
+        tank_moloko += 10000;
         vstrechayshay();
         break;
     case 4:
-        scanf("%d", &skok_dobavit);
-        tank_kakao += skok_dobavit;
+        tank_kakao += 1000;
         vstrechayshay();
         break;
     case 5:
-        printf("snachalo kofe");
-        scanf("%d", &skok_dobavit);
-        tank_kofe += skok_dobavit;
-        printf("Moloko");
-        scanf("%d", &skok_dobavit);
-        tank_moloko += skok_dobavit;
-        scanf("%d", &skok_dobavit);
-        printf("water");
-        tank_water += skok_dobavit;
-        scanf("%d", &skok_dobavit);
-        printf("kakao");
-        tank_kakao += skok_dobavit;
+        tank_kofe += 10000;
+        tank_moloko += 10000;
+        tank_water += 10000;
+        tank_kakao += 1000;
         vstrechayshay();
         break;
     }
-}
-
-void proverka_kofe()
-{
-
-    if (tank_water < 100) {
-        printf("Ostalosi malo water");
-        dostavka();
-    }
-    if (tank_kofe < 25) {
-        if (tank_kakao < 50) {
-            printf("kofe i kakao net");
-            dostavka();
-        }
-        zakaz();
-    }
-    zakaz();
 }
 
 void zakaz()
@@ -92,14 +76,18 @@ void zakaz()
     char napitok[7] = {'e', 'l', 'd', 'a', 'k', 'l', 'k'};
     int otvet_klient;
     int otvet_klienta;
+    if (tank_water < 500){
+        dostavka();
+    }
     if (tank_kofe < 25) {
         printf("%c (yes - 1, no - 2)", napitok[6]);
         scanf("%d", &otvet_klient);
+        setbuf(stdin, NULL);
         if (otvet_klient == 1) {
             otvet_klienta = 6;
             vibor_oplati(otvet_klienta);
         } else {
-            vstrechayshay();
+            dostavka();
         }
     }
     if (tank_kakao < 50) {
@@ -108,21 +96,20 @@ void zakaz()
         }
         printf("Vvidete chislo nujnogo napitka: ");
         scanf("%d", &otvet_klienta);
-        if (otvet_klienta > 6) {
+        setbuf(stdin, NULL);
+        if (otvet_klienta > 5) {
             printf("Sovsem durak?");
             vstrechayshay();
         }
         vibor_oplati(otvet_klienta);
     }
-    
-
-
     for (int i = 0; i < 7; i++) {
         printf("%c pomechen - cifroi: %d \n", napitok[i], i);
     }
     printf("Vvidete chislo nujnogo napitka: ");
     scanf("%d", &otvet_klienta);
-    if (otvet_klienta > 7) {
+    setbuf(stdin, NULL);
+    if (otvet_klienta > 6) {
         printf("Sovsem durak?");
         vstrechayshay();
     } else {
@@ -136,124 +123,190 @@ void vibor_oplati(int otvet_klienta)
     int money_klienta = 0;
     printf("Oplata nalichkoi ili kartoi? (1 ili 2)");
     scanf("%d", &oplata);
+    setbuf(stdin, NULL);
     if (oplata == 1) {
-        printf("Vnesite dengi ");
-        scanf("%d \n", &money_klienta);
-        resultat(otvet_klienta, money_klienta);
+        printf("Vnesite dengi: ");
+        scanf("%d", &money_klienta); 
+        setbuf(stdin, NULL);
+        resultat(oplata, otvet_klienta, money_klienta);
+    }else{
+
+        resultat(oplata, otvet_klienta, money_klienta);
     }
 }
 
-void resultat(int otvet_klient, int money_klienta)
+void resultat(int oplata, int otvet_klienta,int money_klienta)
 {
-    int cena = 0;
-    int sdacha = 0;
-    switch (otvet_klient) {
+    switch (otvet_klienta) {
+    case 0:
+        espresso(oplata, otvet_klienta,  money_klienta);
+        break;
     case 1:
-        cena = 50;
-        if (money_klienta < cena) {
-            printf("Vnesite eshe");
-            scanf("%d", &money_klienta);
-            resultat(otvet_klient, money_klienta);
-        }
-        tank_kofe -= 25;
-        tank_water -= 100;
-        if (money_klienta - cena > 0) {
-            sdacha = money_klienta - cena;
-            printf("vasha sdacha %d", sdacha);
-        }
-        printf("\n Spasibo chto polsuetesi nashimi uslugami!");
+        lungo(oplata, otvet_klienta,  money_klienta);
         break;
     case 2:
-
-        cena = 50;
-        if (money_klienta < cena) {
-            printf("Vnesite eshe");
-            scanf("%d", &money_klienta);
-            resultat(otvet_klient, money_klienta);
-        }
-        tank_kofe -= 25;
-        tank_water -= 100;
-        if (money_klienta - cena > 0) {
-            sdacha = money_klienta - cena;
-            printf("vasha sdacha %d", sdacha);
-        }
-        printf("Spasibo chto polsuetesi nashimi uslugami!");
+        doppio(oplata, otvet_klienta,  money_klienta);
         break;
-    case 3:
 
-        cena = 100;
-        if (money_klienta < cena) {
-            printf("Vnesite eshe");
-            scanf("%d", &money_klienta);
-            resultat(otvet_klient, money_klienta);
-        }
-        tank_kofe -= 50;
-        tank_water -= 200;
-        if (money_klienta - cena > 0) {
-            sdacha = money_klienta - cena;
-            printf("vasha sdacha %d", sdacha);
-        }
-        printf("Spasibo chto polsuetesi nashimi uslugami!");
+    case 3:
+        amerikano(oplata, otvet_klienta,  money_klienta);
         break;
 
     case 4:
-        cena = 150;
-        if (money_klienta < cena) {
-            printf("Vnesite eshe");
-            scanf("%d", &money_klienta);
-            resultat(otvet_klient, money_klienta);
-        }
-        tank_kofe -= 25;
-        tank_water -= 250;
-        if (money_klienta - cena > 0) {
-            sdacha = money_klienta - cena;
-            printf("vasha sdacha %d", sdacha);
-        }
-        printf("Spasibo chto polsuetesi nashimi uslugami!");
+        kapuchino(oplata, otvet_klienta,  money_klienta);
         break;
 
     case 5:
-        tank_kofe -= 25;
-        tank_water -= 100;
-        tank_moloko -= 50;
-        if (money_klienta - cena > 0) {
-            sdacha = money_klienta - cena;
-            printf("vasha sdacha %d", sdacha);
-        }
-        printf("Spasibo chto polsuetesi nashimi uslugami!");
+        latte(oplata, otvet_klienta,  money_klienta);
         break;
 
     case 6:
-        cena = 150;
-        if (money_klienta < cena) {
-            printf("Vnesite eshe");
-            scanf("%d", &money_klienta);
-            resultat(otvet_klient, money_klienta);
-        }
-        tank_kofe -= 25;
-        tank_water -= 100;
-        tank_moloko -= 100;
-        if (money_klienta - cena > 0) {
-            sdacha = money_klienta - cena;
-            printf("vasha sdacha %d", sdacha);
-        }
-        printf("Spasibo chto polsuetesi nashimi uslugami!");
-        break;
-
-    case 7:
-        cena = 150;
-        if (money_klienta < cena) {
-            printf("Vnesite eshe");
-            scanf("%d", &money_klienta);
-            resultat(otvet_klient, money_klienta);
-        }
-        tank_moloko -= 200;
-        tank_kakao -= 50;
-        if (money_klienta - cena > 0) {
-            sdacha = money_klienta - cena;
-            printf("vasha sdacha %d", sdacha);
-        }
-        printf("Spasibo chto polsuetesi nashimi uslugami!");
+        kakao(oplata, otvet_klienta,  money_klienta);
         break;
     }
 }
+
+void espresso(int oplata,int otvet_klienta,int money_klienta){
+    int cena = 50;
+    int ese_money = 0;
+    int sdacha = 0;
+    if (oplata == 1){
+        if (money_klienta < cena){
+            printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
+            scanf("%d", &ese_money);
+            setbuf(stdin, NULL);
+            money_klienta += ese_money;
+            espresso(oplata, otvet_klienta, money_klienta);
+        }else{
+            sdacha = money_klienta - cena;
+            printf("Vasha sdacha: %d \n", sdacha);
+            
+        }
+        tankeri(otvet_klienta);
+    }
+}
+void lungo(int oplata,int otvet_klienta,int money_klienta){
+    int cena = 50;
+    int ese_money = 0;
+    if (oplata == 1){
+        if (money_klienta < cena){
+            printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
+            scanf("%d", &ese_money);
+            setbuf(stdin, NULL);
+            money_klienta += ese_money;
+            lungo(oplata, otvet_klienta,  money_klienta);
+        }
+    }
+}
+void doppio(int oplata,int otvet_klienta,int money_klienta){
+    int cena =100;
+    int ese_money = 0;
+    if (oplata == 1){
+        if (money_klienta < cena){
+            printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
+            scanf("%d", &ese_money);
+            setbuf(stdin, NULL);
+            money_klienta += ese_money;
+            doppio(oplata, otvet_klienta,  money_klienta);
+        }
+    }
+}
+void amerikano(int oplata,int otvet_klienta,int money_klienta){
+    int cena = 150;
+    int ese_money = 0;
+    if (oplata == 1){
+        if (money_klienta < cena){
+            printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
+            scanf("%d", &ese_money);
+            setbuf(stdin, NULL);
+            money_klienta += ese_money;
+            amerikano(oplata, otvet_klienta,  money_klienta);
+        }
+    }
+}
+void kapuchino(int oplata,int otvet_klienta,int money_klienta){
+    int cena = 200;
+    int ese_money = 0;
+    if (oplata == 1){
+        if (money_klienta < cena){
+            printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
+            scanf("%d", &ese_money);
+            setbuf(stdin, NULL);
+            money_klienta += ese_money;
+            kapuchino(oplata, otvet_klienta,  money_klienta);
+        }
+    }
+}
+void latte(int oplata,int otvet_klienta,int money_klienta){
+    int cena = 200;
+    int ese_money = 0;
+    if (oplata == 1){
+        if (money_klienta < cena){
+            printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
+            scanf("%d", &ese_money);
+            setbuf(stdin, NULL);
+            money_klienta += ese_money;
+            latte(oplata, otvet_klienta,  money_klienta);
+        }
+    }
+}
+void kakao(int oplata,int otvet_klienta,int money_klienta){
+    int cena = 150;
+    int ese_money = 0;
+    if (oplata == 1){
+        if (money_klienta < cena){
+            printf("Ne xvataet %d vnesi eshe money ", (cena - money_klienta));
+            scanf("%d", &ese_money);
+            setbuf(stdin, NULL);
+            money_klienta += ese_money;
+            kakao(oplata, otvet_klienta,  money_klienta);
+        }
+    }
+}
+void tankeri(int otvet_klienta){
+    switch (otvet_klienta)
+    {
+    case 0:
+        tank_kofe -= 25;
+        tank_water -= 100;
+        OKONCHANIE();
+        break;
+    case 1:
+        tank_kofe -= 25;
+        tank_water -= 100;
+        OKONCHANIE();
+        break;
+    case 2:
+        tank_kofe -= 50;
+        tank_water -= 200;
+        OKONCHANIE();
+        break;
+    case 3:
+        tank_kofe -= 25;
+        tank_water -= 250;
+        OKONCHANIE();
+        break;
+    case 4:
+        tank_kofe -=25;
+        tank_water -= 100;
+        tank_moloko -=50;
+        OKONCHANIE();
+        break;
+    case 5:
+        tank_kofe -= 25;
+        tank_water -= 100;
+        tank_moloko -= 100;
+        OKONCHANIE();
+        break;
+    case 6:
+        tank_moloko-= 200;
+        tank_kakao -=50;
+        OKONCHANIE();
+        break;
+    }
+}
+void OKONCHANIE(){
+    printf("Spasipo cto prishli, vot vash napitok! \n\n");
+    vstrechayshay();
+}
+
