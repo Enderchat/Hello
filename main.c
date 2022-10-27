@@ -52,11 +52,12 @@ void dostavka()
         break;
 
     case 2:
+
         tank_water += 10000;
         vstrechayshay();
         break;
-    case 3:
 
+    case 3:
         tank_moloko += 10000;
         vstrechayshay();
         break;
@@ -64,12 +65,16 @@ void dostavka()
         tank_kakao += 1000;
         vstrechayshay();
         break;
+
     case 5:
         tank_kofe += 10000;
         tank_moloko += 10000;
         tank_water += 10000;
         tank_kakao += 1000;
         vstrechayshay();
+        break;
+    
+    default:
         break;
     }
 }
@@ -166,6 +171,9 @@ void resultat(int oplata, int otvet_klienta,int money_klienta)
     case 6:
         kakao(oplata, otvet_klienta,  money_klienta);
         break;
+
+    default:
+        break;
     }
 }
 
@@ -186,8 +194,11 @@ void espresso(int oplata,int otvet_klienta,int money_klienta){
             
         }
         tankeri(otvet_klienta);
-    }
+    }else{money_klienta = cena;
+    tankeri(otvet_klienta);
+    } 
 }
+
 void lungo(int oplata,int otvet_klienta,int money_klienta){
     int cena = 50;
     int ese_money = 0;
@@ -199,8 +210,12 @@ void lungo(int oplata,int otvet_klienta,int money_klienta){
             money_klienta += ese_money;
             lungo(oplata, otvet_klienta,  money_klienta);
         }
+    tankeri(otvet_klienta);
+    }else{money_klienta = cena;
+    tankeri(otvet_klienta);
     }
 }
+
 void doppio(int oplata,int otvet_klienta,int money_klienta){
     int cena =100;
     int ese_money = 0;
@@ -212,8 +227,12 @@ void doppio(int oplata,int otvet_klienta,int money_klienta){
             money_klienta += ese_money;
             doppio(oplata, otvet_klienta,  money_klienta);
         }
+    tankeri(otvet_klienta);
+    }else{money_klienta = cena;
+    tankeri(otvet_klienta);
     }
 }
+
 void amerikano(int oplata,int otvet_klienta,int money_klienta){
     int cena = 150;
     int ese_money = 0;
@@ -225,8 +244,12 @@ void amerikano(int oplata,int otvet_klienta,int money_klienta){
             money_klienta += ese_money;
             amerikano(oplata, otvet_klienta,  money_klienta);
         }
+    tankeri(otvet_klienta);
+    }else{money_klienta = cena;
+    tankeri(otvet_klienta);
     }
 }
+
 void kapuchino(int oplata,int otvet_klienta,int money_klienta){
     int cena = 200;
     int ese_money = 0;
@@ -238,8 +261,12 @@ void kapuchino(int oplata,int otvet_klienta,int money_klienta){
             money_klienta += ese_money;
             kapuchino(oplata, otvet_klienta,  money_klienta);
         }
+    tankeri(otvet_klienta);
+    }else{money_klienta = cena;
+    tankeri(otvet_klienta);
     }
 }
+
 void latte(int oplata,int otvet_klienta,int money_klienta){
     int cena = 200;
     int ese_money = 0;
@@ -251,8 +278,12 @@ void latte(int oplata,int otvet_klienta,int money_klienta){
             money_klienta += ese_money;
             latte(oplata, otvet_klienta,  money_klienta);
         }
+    tankeri(otvet_klienta);
+    }else{money_klienta = cena;
+    tankeri(otvet_klienta);
     }
 }
+
 void kakao(int oplata,int otvet_klienta,int money_klienta){
     int cena = 150;
     int ese_money = 0;
@@ -264,8 +295,12 @@ void kakao(int oplata,int otvet_klienta,int money_klienta){
             money_klienta += ese_money;
             kakao(oplata, otvet_klienta,  money_klienta);
         }
+    tankeri(otvet_klienta);
+    }else{money_klienta = cena;
+    tankeri(otvet_klienta);
     }
 }
+
 void tankeri(int otvet_klienta){
     switch (otvet_klienta)
     {
@@ -306,10 +341,13 @@ void tankeri(int otvet_klienta){
         tank_kakao -=50;
         OKONCHANIE();
         break;
+    
+    default:
+        break;
     }
 }
+
 void OKONCHANIE(){
     printf("Spasipo cto prishli, vot vash napitok! \n\n");
     vstrechayshay();
 }
-
