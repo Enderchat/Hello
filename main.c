@@ -178,10 +178,11 @@ void resultat(int oplata, int otvet_klienta,int money_klienta)
 }
 
 void espresso(int oplata,int otvet_klienta,int money_klienta){
-    int cena = 50;
-    int ese_money = 0;
-    int sdacha = 0;
+    
     if (oplata == 1){
+        int cena = 50;
+        int ese_money = 0;
+        int sdacha = 0;
         if (money_klienta < cena){
             printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
             scanf("%d", &ese_money);
@@ -200,9 +201,10 @@ void espresso(int oplata,int otvet_klienta,int money_klienta){
 }
 
 void lungo(int oplata,int otvet_klienta,int money_klienta){
-    int cena = 50;
-    int ese_money = 0;
     if (oplata == 1){
+        int cena = 50;
+        int ese_money = 0;
+        int sdacha = 0;
         if (money_klienta < cena){
             printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
             scanf("%d", &ese_money);
@@ -217,9 +219,10 @@ void lungo(int oplata,int otvet_klienta,int money_klienta){
 }
 
 void doppio(int oplata,int otvet_klienta,int money_klienta){
-    int cena =100;
-    int ese_money = 0;
     if (oplata == 1){
+        int cena =100;
+        int ese_money = 0;
+        int sdacha = 0;
         if (money_klienta < cena){
             printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
             scanf("%d", &ese_money);
@@ -234,9 +237,10 @@ void doppio(int oplata,int otvet_klienta,int money_klienta){
 }
 
 void amerikano(int oplata,int otvet_klienta,int money_klienta){
-    int cena = 150;
-    int ese_money = 0;
     if (oplata == 1){
+        int cena = 150;
+        int ese_money = 0;
+        int sdacha = 0;
         if (money_klienta < cena){
             printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
             scanf("%d", &ese_money);
@@ -251,9 +255,11 @@ void amerikano(int oplata,int otvet_klienta,int money_klienta){
 }
 
 void kapuchino(int oplata,int otvet_klienta,int money_klienta){
-    int cena = 200;
-    int ese_money = 0;
+    
     if (oplata == 1){
+        int cena = 200;
+        int ese_money = 0;
+        int sdacha = 0;
         if (money_klienta < cena){
             printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
             scanf("%d", &ese_money);
@@ -268,9 +274,10 @@ void kapuchino(int oplata,int otvet_klienta,int money_klienta){
 }
 
 void latte(int oplata,int otvet_klienta,int money_klienta){
-    int cena = 200;
-    int ese_money = 0;
     if (oplata == 1){
+        int cena = 200;
+        int ese_money = 0;
+        int sdacha = 0;
         if (money_klienta < cena){
             printf("Ne xvataet %d vnesi eshe money ", cena - money_klienta);
             scanf("%d", &ese_money);
@@ -285,9 +292,10 @@ void latte(int oplata,int otvet_klienta,int money_klienta){
 }
 
 void kakao(int oplata,int otvet_klienta,int money_klienta){
-    int cena = 150;
-    int ese_money = 0;
     if (oplata == 1){
+        int cena = 150;
+        int ese_money = 0;
+        int sdacha = 0;
         if (money_klienta < cena){
             printf("Ne xvataet %d vnesi eshe money ", (cena - money_klienta));
             scanf("%d", &ese_money);
