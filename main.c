@@ -3,6 +3,7 @@
 
 int tank_kofe = 15000, tank_moloko = 10000, tank_water = 20000,
     tank_kakao = 2000, money = 15000;
+
 void vstrechayshay();
 void dostavka();
 void proverka_kofe();
@@ -19,18 +20,20 @@ void latte(int oplata,int otvet_klienta,int money_klienta);
 void kakao(int oplata,int otvet_klienta,int money_klienta);
 void tankeri(int otvet_klienta);
 
+
 int main() { vstrechayshay(); }
 
 void vstrechayshay()
-{
+{   
+        
     char vibor;
-    printf("Vi za kofe? (y or n)");
+    printf("Vi za kofe? (y or n) ");
     scanf("%c", &vibor);
     setbuf(stdin, NULL);
     if (vibor == 'y') {
         zakaz();
     } else {
-        int servise();
+        
     }
 }
 
